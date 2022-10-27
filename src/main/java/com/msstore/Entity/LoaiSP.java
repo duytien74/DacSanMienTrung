@@ -1,7 +1,9 @@
 package com.msstore.Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,12 +15,14 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity 
-@Table(name = "LoaiSP")
-public class LoaiSP {
+@Table(name = "LOAISP")
+public class LoaiSP implements Serializable{
 	@Id
-	private String maloai;
-	private String tenloai;
+	@Column(name="maloai")
+	private String maLoai;
+	@Column(name="tenloai")
+	private String tenLoai;
 	
-	@OneToMany(mappedBy = "maloai")
+	@OneToMany(mappedBy = "loaiSP")
 	List<SanPham> sp;
 }

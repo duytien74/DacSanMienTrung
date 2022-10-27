@@ -1,7 +1,9 @@
 package com.msstore.Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,22 +20,31 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity 
 @Table(name = "SANPHAM")
-public class SanPham {
+public class SanPham implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int masp;
-	private String tensp;
-	private int soluong;
-	private Double dongia;
-	private String mota;
+	@Column(name="masp")
+	private long maSP;
+	@Column(name="tensp")
+	private String tenSP;
+	@Column(name="soluong")
+	private int soLuong;
+	@Column(name="dongia")
+	private Double donGia;
+	@Column(name="mota")
+	private String moTa;
 	
 	@ManyToOne
-	@JoinColumn(name = "MaLoai")
-	LoaiSP maloai;
+	@JoinColumn(name = "maloai")
+	LoaiSP loaiSP;
 	
-	@OneToMany(mappedBy = "maSP")
-	List<HinhAnh> hinhanh;
 	
-	@OneToMany(mappedBy = "maSP")
+	@OneToMany(mappedBy = "sp")
+	List<BinhLuan> bl;
+	
+	@OneToMany(mappedBy = "sp")
+	List<HinhAnh> hinhAnh;
+	
+	@OneToMany(mappedBy = "sp")
 	List<ChiTietDonHang> ctdh;
 }

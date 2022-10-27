@@ -1,7 +1,9 @@
 package com.msstore.Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +19,16 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
 @Table(name = "HINHANH")
-public class HinhAnh {
+public class HinhAnh implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int mahinh;
-	private int masp;
-	private String hinhanh;
+	@Column(name="mahinh")
+	private int maHinh;
+	@Column(name="tenhinh")
+	private String tenHinh;
+
 	
 	@ManyToOne
-	@JoinColumn(name = "Ma_SP")
-	SanPham maSP;
+	@JoinColumn(name = "maSP")
+	SanPham sp;
 }
